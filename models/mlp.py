@@ -18,7 +18,7 @@ class MLP_G(nn.Module):
             nn.ReLU(True),
             nn.Linear(ngf, ngf),
             nn.ReLU(True),
-            nn.Linear(ngf, dsize),
+            nn.Linear(ngf, nsize),
         )
         self.main = main
         self.nz = nz
@@ -60,3 +60,30 @@ class MLP_D(nn.Module):
             output = self.main(input)
         output = output.mean(0)
         return output.view(1)
+
+class MLP_P(nn.Module):
+    def __init__(self, isize,  ndf, ngpu):
+        super(MLP_P, self).__init__()
+        self.ngpu = ngpu
+
+        main = nn.Sequential(
+            # Z goes into a linear of size: ndf
+            nn.Linear(isize, ndf),
+            nn.ReLU(True),
+            nn.Linear(ndf, ndf),
+            nn.ReLU(True),
+            nn.Linear(ndf, ndf),
+            nn.ReLU(True),
+            nn.Linear(ndf, 1),
+        )
+        self.main = main
+        self.isize = isize
+
+    def forward(self, input):
+        input = input.view(input.size(0),
+                           input.size(1))
+        if isinstance(input.data, torch.cuda.FloatTensor) and self.ngpu > 1:
+            output = nn.parallel.data_parallel(self.main, input, range(self.ngpu))
+        else:
+            output = self.main(input)
+        return output.view(output.size(0), 1)

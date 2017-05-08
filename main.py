@@ -17,9 +17,12 @@ import models.dcgan as dcgan
 import models.mlp as mlp
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--dataroot', default='/imgs/test.csv', help='path to dataset')
+parser.add_argument('--pos_data', default='/imgs/test.csv', help='path to dataset')
+parser.add_argument('--neg_data', default='/imgs/test.csv', help='path to dataset')
+
 parser.add_argument('--workers', type=int, help='number of data loading workers', default=2)
-parser.add_argument('--batchSize', type=int, default=64, help='input batch size')
+parser.add_argument('--batchSize', type=int, default=1, help='input batch size')
+parser.add_argument('--nSize', type=int, default=100, help='noise size')
 parser.add_argument('--nz', type=int, default=100, help='size of the latent z vector')
 parser.add_argument('--ngf', type=int, default=64)
 parser.add_argument('--ndf', type=int, default=64)
@@ -60,8 +63,12 @@ if torch.cuda.is_available() and not opt.cuda:
 
 
 assert dataset
-dataset = DatasetFromPandas(opt.dataroot)
-dataloader = torch.utils.data.DataLoader(dataset, batch_size=opt.batchSize,
+pos_data = DatasetFromPandas(opt.pos_data)
+neg_data = DatasetFromPandas(opt.neg_data)
+
+pos_dataloader = torch.utils.data.DataLoader(pos_data, batch_size=opt.batchSize,
+                                         shuffle=True, num_workers=int(opt.workers))
+neg_dataloader = torch.utils.data.DataLoader(neg_data, batch_size=opt.batchSize,
                                          shuffle=True, num_workers=int(opt.workers))
 
 ngpu = int(opt.ngpu)
@@ -83,7 +90,7 @@ def weights_init(m):
 if opt.noBN:
     netG = dcgan.DCGAN_G_nobn(opt.imageSize, nz, nc, ngf, ngpu, n_extra_layers)
 elif opt.mlp_G:
-    netG = mlp.MLP_G(opt.imageSize, nz, nc, ngf, ngpu)
+    netG = mlp.MLP_G(nz, nz,  ngf, ngpu)
 else:
     netG = dcgan.DCGAN_G(opt.imageSize, nz, nc, ngf, ngpu, n_extra_layers)
 
@@ -93,7 +100,7 @@ if opt.netG != '': # load checkpoint if needed
 print(netG)
 
 if opt.mlp_D:
-    netD = mlp.MLP_D(opt.imageSize, nz, nc, ndf, ngpu)
+    netD = mlp.MLP_D(opt.nSize,  ndf, ngpu)
 else:
     netD = dcgan.DCGAN_D(opt.imageSize, nz, nc, ndf, ngpu, n_extra_layers)
     netD.apply(weights_init)
@@ -102,9 +109,9 @@ if opt.netD != '':
     netD.load_state_dict(torch.load(opt.netD))
 print(netD)
 
-input = torch.FloatTensor(opt.batchSize, 3, opt.imageSize, opt.imageSize)
+input = torch.FloatTensor(opt.batchSize, opt.nSize)
 noise = torch.FloatTensor(opt.batchSize, nz, 1, 1)
-fixed_noise = torch.FloatTensor(opt.batchSize, nz, 1, 1).normal_(0, 1)
+# fixed_noise = torch.FloatTensor(opt.batchSize, nz, 1, 1).normal_(0, 1)
 one = torch.FloatTensor([1])
 mone = one * -1
 
@@ -125,7 +132,9 @@ else:
 
 gen_iterations = 0
 for epoch in range(opt.niter):
-    data_iter = iter(dataloader)
+    data_iter = iter(pos_dataloader)
+    neg_iter = iter(neg_dataloader)
+
     i = 0
     while i < len(dataloader):
         ############################
@@ -151,9 +160,9 @@ for epoch in range(opt.niter):
             i += 1
 
             # train with real
-            real_cpu, _ = data
+            real_cpu = data
             netD.zero_grad()
-            batch_size = real_cpu.size(0)
+            # batch_size = real_cpu.size(0)
 
             if opt.cuda:
                 real_cpu = real_cpu.cuda()
@@ -164,7 +173,12 @@ for epoch in range(opt.niter):
             errD_real.backward(one)
 
             # train with fake
-            noise.resize_(opt.batchSize, nz, 1, 1).normal_(0, 1)
+            noise = neg_iter.next()
+            if noise == None:
+                neg_iter = iter(neg_dataloader)
+                noise = neg_iter.next()
+
+            # noise.resize_(opt.batchSize, nz, 1, 1).normal_(0, 1)
             noisev = Variable(noise, volatile = True) # totally freeze netG
             fake = Variable(netG(noisev).data)
             inputv = fake
@@ -181,7 +195,12 @@ for epoch in range(opt.niter):
         netG.zero_grad()
         # in case our last batch was the tail batch of the dataloader,
         # make sure we feed a full batch of noise
-        noise.resize_(opt.batchSize, nz, 1, 1).normal_(0, 1)
+        # noise.resize_(opt.batchSize, nz, 1, 1).normal_(0, 1)
+        noise = neg_iter.next()
+        if noise == None:
+            neg_iter = iter(neg_dataloader)
+            noise = neg_iter.next()
+
         noisev = Variable(noise)
         fake = netG(noisev)
         errG = netD(fake)
@@ -193,12 +212,10 @@ for epoch in range(opt.niter):
             % (epoch, opt.niter, i, len(dataloader), gen_iterations,
             errD.data[0], errG.data[0], errD_real.data[0], errD_fake.data[0]))
         if gen_iterations % 500 == 0:
-            real_cpu = real_cpu.mul(0.5).add(0.5)
-            vutils.save_image(real_cpu, '{0}/real_samples.png'.format(opt.experiment))
-            fake = netG(Variable(fixed_noise, volatile=True))
-            fake.data = fake.data.mul(0.5).add(0.5)
-            vutils.save_image(fake.data, '{0}/fake_samples_{1}.png'.format(opt.experiment, gen_iterations))
-
+            # real_cpu = real_cpu.mul(0.5).add(0.5)
+            # fake = netG(Variable(fixed_noise, volatile=True))
+            # fake.data = fake.data.mul(0.5).add(0.5)
+            pass
     # do checkpointing
     torch.save(netG.state_dict(), '{0}/netG_epoch_{1}.pth'.format(opt.experiment, epoch))
     torch.save(netD.state_dict(), '{0}/netD_epoch_{1}.pth'.format(opt.experiment, epoch))
