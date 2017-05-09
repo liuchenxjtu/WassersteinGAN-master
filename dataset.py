@@ -5,7 +5,7 @@ class DatasetFromPandas(torch.utils.data.Dataset):
     def __init__(self, file_path):
         super(DatasetFromPandas, self).__init__()
         df = pd.read_csv(file_path)
-        self.data = df[df.columns[1:-1]]
+        self.data = df
 
     def __getitem__(self, index):
         return torch.from_numpy(np.array(self.data.iloc[index])).float()

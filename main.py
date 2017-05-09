@@ -12,18 +12,23 @@ import torchvision.transforms as transforms
 import torchvision.utils as vutils
 from torch.autograd import Variable
 import os
-
+from dataset import DatasetFromPandas
 import models.dcgan as dcgan
 import models.mlp as mlp
 
-parser = argparse.ArgumentParser()
-parser.add_argument('--pos_data', default='/imgs/test.csv', help='path to dataset')
-parser.add_argument('--neg_data', default='/imgs/test.csv', help='path to dataset')
+import pandas as pd
+from sklearn import metrics
+from sklearn.metrics import confusion_matrix
 
+parser = argparse.ArgumentParser()
+parser.add_argument('--pos_data', default='/Users/chen.liu/nfs03/user_data/liuchen01/creds/train_neg.dat', help='path to dataset')
+parser.add_argument('--neg_data', default='/Users/chen.liu/nfs03/user_data/liuchen01/creds/train_pos.dat', help='path to dataset')
+parser.add_argument('--test_data', default='/Users/chen.liu/nfs03/user_data/liuchen01/creds/test_feature.dat', help='path to dataset')
+parser.add_argument('--test_label', default='/Users/chen.liu/nfs03/user_data/liuchen01/creds/test_labels.dat', help='path to dataset')
 parser.add_argument('--workers', type=int, help='number of data loading workers', default=2)
-parser.add_argument('--batchSize', type=int, default=1, help='input batch size')
-parser.add_argument('--nSize', type=int, default=100, help='noise size')
-parser.add_argument('--nz', type=int, default=100, help='size of the latent z vector')
+parser.add_argument('--batchSize', type=int, default=64, help='input batch size')
+parser.add_argument('--nSize', type=int, default=148, help='noise size')
+parser.add_argument('--nz', type=int, default=148, help='size of the latent z vector')
 parser.add_argument('--ngf', type=int, default=64)
 parser.add_argument('--ndf', type=int, default=64)
 parser.add_argument('--niter', type=int, default=25, help='number of epochs to train for')
@@ -34,6 +39,7 @@ parser.add_argument('--cuda'  , action='store_true', help='enables cuda')
 parser.add_argument('--ngpu'  , type=int, default=1, help='number of GPUs to use')
 parser.add_argument('--netG', default='', help="path to netG (to continue training)")
 parser.add_argument('--netD', default='', help="path to netD (to continue training)")
+parser.add_argument('--netP', default='samples/netD_epoch_24.pth', help="path to netP (to continue training)")
 parser.add_argument('--clamp_lower', type=float, default=-0.01)
 parser.add_argument('--clamp_upper', type=float, default=0.01)
 parser.add_argument('--Diters', type=int, default=5, help='number of D iters per each G iter')
@@ -62,11 +68,11 @@ if torch.cuda.is_available() and not opt.cuda:
     print("WARNING: You have a CUDA device, so you should probably run with --cuda")
 
 
-assert dataset
 pos_data = DatasetFromPandas(opt.pos_data)
+
 neg_data = DatasetFromPandas(opt.neg_data)
 
-pos_dataloader = torch.utils.data.DataLoader(pos_data, batch_size=opt.batchSize,
+dataloader = torch.utils.data.DataLoader(pos_data, batch_size=opt.batchSize,
                                          shuffle=True, num_workers=int(opt.workers))
 neg_dataloader = torch.utils.data.DataLoader(neg_data, batch_size=opt.batchSize,
                                          shuffle=True, num_workers=int(opt.workers))
@@ -75,7 +81,6 @@ ngpu = int(opt.ngpu)
 nz = int(opt.nz)
 ngf = int(opt.ngf)
 ndf = int(opt.ndf)
-nc = int(opt.nc)
 n_extra_layers = int(opt.n_extra_layers)
 
 # custom weights initialization called on netG and netD
@@ -109,8 +114,11 @@ if opt.netD != '':
     netD.load_state_dict(torch.load(opt.netD))
 print(netD)
 
+# if opt.netP != '': # load checkpoint if needed
+#     netP.load_state_dict(torch.load(opt.netG))
+
 input = torch.FloatTensor(opt.batchSize, opt.nSize)
-noise = torch.FloatTensor(opt.batchSize, nz, 1, 1)
+# noise = torch.FloatTensor(opt.batchSize, nz, 1, 1)
 # fixed_noise = torch.FloatTensor(opt.batchSize, nz, 1, 1).normal_(0, 1)
 one = torch.FloatTensor([1])
 mone = one * -1
@@ -131,8 +139,10 @@ else:
     optimizerG = optim.RMSprop(netG.parameters(), lr = opt.lrG)
 
 gen_iterations = 0
-for epoch in range(opt.niter):
-    data_iter = iter(pos_dataloader)
+test = DatasetFromPandas(opt.test_data)
+labels = list(pd.read_csv(opt.test_label,header=None)[0])
+for epoch in range(1):
+    data_iter = iter(dataloader)
     neg_iter = iter(neg_dataloader)
 
     i = 0
@@ -151,7 +161,6 @@ for epoch in range(opt.niter):
         j = 0
         while j < Diters and i < len(dataloader):
             j += 1
-
             # clamp parameters to a cube
             for p in netD.parameters():
                 p.data.clamp_(opt.clamp_lower, opt.clamp_upper)
@@ -173,8 +182,10 @@ for epoch in range(opt.niter):
             errD_real.backward(one)
 
             # train with fake
-            noise = neg_iter.next()
-            if noise == None:
+            try:
+                noise = neg_iter.next()
+#                 print (noise.size())
+            except:
                 neg_iter = iter(neg_dataloader)
                 noise = neg_iter.next()
 
@@ -196,26 +207,35 @@ for epoch in range(opt.niter):
         # in case our last batch was the tail batch of the dataloader,
         # make sure we feed a full batch of noise
         # noise.resize_(opt.batchSize, nz, 1, 1).normal_(0, 1)
-        noise = neg_iter.next()
-        if noise == None:
-            neg_iter = iter(neg_dataloader)
-            noise = neg_iter.next()
+        try:
+                noise = neg_iter.next()
+
+        except:
+                neg_iter = iter(neg_dataloader)
+                noise = neg_iter.next()
 
         noisev = Variable(noise)
         fake = netG(noisev)
         errG = netD(fake)
+
         errG.backward(one)
         optimizerG.step()
         gen_iterations += 1
 
-        print('[%d/%d][%d/%d][%d] Loss_D: %f Loss_G: %f Loss_D_real: %f Loss_D_fake %f'
-            % (epoch, opt.niter, i, len(dataloader), gen_iterations,
-            errD.data[0], errG.data[0], errD_real.data[0], errD_fake.data[0]))
-        if gen_iterations % 500 == 0:
-            # real_cpu = real_cpu.mul(0.5).add(0.5)
-            # fake = netG(Variable(fixed_noise, volatile=True))
-            # fake.data = fake.data.mul(0.5).add(0.5)
-            pass
-    # do checkpointing
-    torch.save(netG.state_dict(), '{0}/netG_epoch_{1}.pth'.format(opt.experiment, epoch))
+    print('[%d/%d][%d/%d][%d] Loss_D: %f Loss_G: %f Loss_D_real: %f Loss_D_fake %f'
+        % (epoch, opt.niter, i, len(dataloader), gen_iterations,
+        errD.data[0], errG.data[0], errD_real.data[0], errD_fake.data[0]))
+
     torch.save(netD.state_dict(), '{0}/netD_epoch_{1}.pth'.format(opt.experiment, epoch))
+    testdataloader = torch.utils.data.DataLoader(test, batch_size=len(test),
+                                         shuffle=False, num_workers=int(opt.workers))
+    testdataiter = iter(testdataloader)
+    testv = Variable(testdataiter.next())
+    netP = mlp.MLP_P(opt.nSize,  ndf, ngpu)
+    netP.load_state_dict(torch.load('{0}/netD_epoch_{1}.pth'.format(opt.experiment, epoch)))
+    pred_probs = (netP(testv).data.numpy())
+    pred_probs = (pred_probs-min(pred_probs))/(max(pred_probs)-min(pred_probs))
+    for i in range(0,10,2):
+        pred = [1 if j>i/10.0 else 0 for j in pred_probs ]
+        print (confusion_matrix(labels,pred))
+        print ("Accuracy, ",  metrics.accuracy_score(labels,pred))
