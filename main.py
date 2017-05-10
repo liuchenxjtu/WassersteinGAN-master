@@ -128,7 +128,7 @@ if opt.cuda:
     netG.cuda()
     input = input.cuda()
     one, mone = one.cuda(), mone.cuda()
-    noise, fixed_noise = noise.cuda(), fixed_noise.cuda()
+    # noise, fixed_noise = noise.cuda(), fixed_noise.cuda()
 
 # setup optimizer
 if opt.adam:
@@ -141,7 +141,7 @@ else:
 gen_iterations = 0
 test = DatasetFromPandas(opt.test_data)
 labels = list(pd.read_csv(opt.test_label,header=None)[0])
-for epoch in range(1):
+for epoch in range(opt.niter):
     data_iter = iter(dataloader)
     neg_iter = iter(neg_dataloader)
 
@@ -188,7 +188,8 @@ for epoch in range(1):
             except:
                 neg_iter = iter(neg_dataloader)
                 noise = neg_iter.next()
-
+            if opt.cuda:
+                noise = noise.cuda()
             # noise.resize_(opt.batchSize, nz, 1, 1).normal_(0, 1)
             noisev = Variable(noise, volatile = True) # totally freeze netG
             fake = Variable(netG(noisev).data)
@@ -213,7 +214,8 @@ for epoch in range(1):
         except:
                 neg_iter = iter(neg_dataloader)
                 noise = neg_iter.next()
-
+        if opt.cuda:
+            noise = noise.cuda()
         noisev = Variable(noise)
         fake = netG(noisev)
         errG = netD(fake)
