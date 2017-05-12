@@ -46,7 +46,7 @@ class MLP_D(nn.Module):
             nn.ReLU(True),
             nn.Linear(ndf, ndf),
             nn.ReLU(True),
-            nn.Linear(ndf, 1),
+            nn.Linear(ndf, 1)
         )
         self.main = main
         self.isize = isize
