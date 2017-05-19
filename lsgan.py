@@ -233,7 +233,8 @@ for epoch in range(20):
         print (max(pred_probs),min(pred_probs),len(pred_probs))
         pred_probs = (netD(netG(testv)).cpu().data.numpy())
         print (max(pred_probs),min(pred_probs),len(pred_probs))
-    torch.save(netD.state_dict(), '{0}/lsgan_netD_epoch_{1}.pth'.format(opt.experiment, epoch))
+    if epoch%5==0:
+        torch.save(netD.state_dict(), '{0}/lsgan_netD_epoch_{1}.pth'.format(opt.experiment, epoch))
 
 #         pred_probs = (netD(testv.cuda()).cpu().data.numpy())
 #         pred_probs = (pred_probs-min(pred_probs))/(max(pred_probs)-min(pred_probs))

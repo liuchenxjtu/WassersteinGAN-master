@@ -1,0 +1,225 @@
+mkdir: cannot create directory ‘samples’: File exists
+Namespace(Diters=5, adam=False, batchSize=128, beta1=0.5, clamp_lower=-0.02, clamp_upper=0.02, cuda=True, experiment=None, lrD=5e-05, lrG=5e-05, mlp_D=True, mlp_G=True, nSize=248, n_extra_layers=0, ndf=64, neg_data='/storage03/user_data/liuchen01/creds/bank_combined_noisy', netD='', netG='', netP='samples/netD_epoch_24.pth', ngf=64, ngpu=1, niter=25, noBN=False, nz=148, pos_data='/storage03/user_data/liuchen01/creds/bank_combined_train', test_data='/storage03/user_data/liuchen01/creds/bank_combined_test', test_label='/storage03/user_data/liuchen01/creds/test_labels.dat', workers=2)
+Random Seed:  1729
+MLP_G (
+  (main): Sequential (
+    (0): Linear (148 -> 64)
+    (1): ReLU (inplace)
+    (2): Linear (64 -> 64)
+    (3): ReLU (inplace)
+    (4): Linear (64 -> 64)
+    (5): ReLU (inplace)
+    (6): Linear (64 -> 248)
+  )
+)
+MLP_D (
+  (main): Sequential (
+    (0): Linear (248 -> 64)
+    (1): ReLU (inplace)
+    (2): Linear (64 -> 64)
+    (3): ReLU (inplace)
+    (4): Linear (64 -> 64)
+    (5): ReLU (inplace)
+    (6): Linear (64 -> 1)
+  )
+)
+[0/25][3316/3316][189] Loss_D: -0.257418 Loss_G: 0.016635 Loss_D_real: -0.240923 Loss_D_fake 0.016495
+[1/25][3316/3316][834] Loss_D: -0.257222 Loss_G: 0.016976 Loss_D_real: -0.240282 Loss_D_fake 0.016941
+[2/25][3316/3316][1479] Loss_D: -0.262381 Loss_G: 0.022612 Loss_D_real: -0.239949 Loss_D_fake 0.022431
+[3/25][3316/3316][2105] Loss_D: -0.263714 Loss_G: 0.023631 Loss_D_real: -0.240379 Loss_D_fake 0.023335
+[4/25][3316/3316][2750] Loss_D: -0.263726 Loss_G: 0.023592 Loss_D_real: -0.240272 Loss_D_fake 0.023454
+[5/25][3316/3316][3395] Loss_D: -0.263314 Loss_G: 0.023511 Loss_D_real: -0.239897 Loss_D_fake 0.023417
+[6/25][3316/3316][4021] Loss_D: -0.264008 Loss_G: 0.023996 Loss_D_real: -0.240160 Loss_D_fake 0.023848
+[7/25][3316/3316][4666] Loss_D: -0.264339 Loss_G: 0.023963 Loss_D_real: -0.240460 Loss_D_fake 0.023879
+[8/25][3316/3316][5311] Loss_D: -0.263675 Loss_G: 0.024035 Loss_D_real: -0.239830 Loss_D_fake 0.023845
+[9/25][3316/3316][5956] Loss_D: -0.264261 Loss_G: 0.024058 Loss_D_real: -0.240387 Loss_D_fake 0.023874
+[10/25][3316/3316][6582] Loss_D: -0.263209 Loss_G: 0.024054 Loss_D_real: -0.239419 Loss_D_fake 0.023789
+[11/25][3316/3316][7227] Loss_D: -0.263510 Loss_G: 0.023947 Loss_D_real: -0.239705 Loss_D_fake 0.023805
+[12/25][3316/3316][7872] Loss_D: -0.263798 Loss_G: 0.023915 Loss_D_real: -0.239981 Loss_D_fake 0.023817
+[13/25][3316/3316][8501] Loss_D: -0.263495 Loss_G: 0.024031 Loss_D_real: -0.239592 Loss_D_fake 0.023904
+[14/25][3316/3316][9146] Loss_D: -0.263732 Loss_G: 0.023933 Loss_D_real: -0.239892 Loss_D_fake 0.023840
+[15/25][3316/3316][9791] Loss_D: -0.263399 Loss_G: 0.023986 Loss_D_real: -0.239584 Loss_D_fake 0.023815
+[16/25][3316/3316][10436] Loss_D: -0.264419 Loss_G: 0.023958 Loss_D_real: -0.240551 Loss_D_fake 0.023868
+[17/25][3316/3316][11062] Loss_D: -0.263220 Loss_G: 0.023989 Loss_D_real: -0.239333 Loss_D_fake 0.023886
+[18/25][3316/3316][11707] Loss_D: -0.263940 Loss_G: 0.023924 Loss_D_real: -0.240095 Loss_D_fake 0.023845
+[19/25][3316/3316][12352] Loss_D: -0.263919 Loss_G: 0.023997 Loss_D_real: -0.240148 Loss_D_fake 0.023770
+[20/25][3316/3316][12997] Loss_D: -0.263812 Loss_G: 0.024031 Loss_D_real: -0.239924 Loss_D_fake 0.023888
+[21/25][3316/3316][13623] Loss_D: -0.262813 Loss_G: 0.023904 Loss_D_real: -0.239019 Loss_D_fake 0.023794
+[22/25][3316/3316][14268] Loss_D: -0.263475 Loss_G: 0.023965 Loss_D_real: -0.239541 Loss_D_fake 0.023934
+[23/25][3316/3316][14913] Loss_D: -0.263793 Loss_G: 0.024015 Loss_D_real: -0.239866 Loss_D_fake 0.023926
+[24/25][3316/3316][15539] Loss_D: -0.264487 Loss_G: 0.024004 Loss_D_real: -0.240602 Loss_D_fake 0.023885
+[25/25][3316/3316][16184] Loss_D: -0.264771 Loss_G: 0.024009 Loss_D_real: -0.240898 Loss_D_fake 0.023873
+[26/25][3316/3316][16829] Loss_D: -0.263104 Loss_G: 0.024009 Loss_D_real: -0.239283 Loss_D_fake 0.023821
+[27/25][3316/3316][17474] Loss_D: -0.263615 Loss_G: 0.023968 Loss_D_real: -0.239766 Loss_D_fake 0.023849
+[28/25][3316/3316][18100] Loss_D: -0.263746 Loss_G: 0.024034 Loss_D_real: -0.239867 Loss_D_fake 0.023879
+[29/25][3316/3316][18745] Loss_D: -0.263148 Loss_G: 0.023964 Loss_D_real: -0.239312 Loss_D_fake 0.023836
+[30/25][3316/3316][19390] Loss_D: -0.263557 Loss_G: 0.024018 Loss_D_real: -0.239697 Loss_D_fake 0.023860
+[31/25][3316/3316][20016] Loss_D: -0.264503 Loss_G: 0.023998 Loss_D_real: -0.240615 Loss_D_fake 0.023889
+[32/25][3316/3316][20661] Loss_D: -0.263796 Loss_G: 0.023987 Loss_D_real: -0.239901 Loss_D_fake 0.023895
+[33/25][3316/3316][21306] Loss_D: -0.264173 Loss_G: 0.023969 Loss_D_real: -0.240269 Loss_D_fake 0.023904
+[34/25][3316/3316][21951] Loss_D: -0.263191 Loss_G: 0.023962 Loss_D_real: -0.239325 Loss_D_fake 0.023865
+[35/25][3316/3316][22577] Loss_D: -0.264230 Loss_G: 0.023959 Loss_D_real: -0.240387 Loss_D_fake 0.023843
+[36/25][3316/3316][23222] Loss_D: -0.264226 Loss_G: 0.024080 Loss_D_real: -0.240312 Loss_D_fake 0.023914
+[37/25][3316/3316][23867] Loss_D: -0.263223 Loss_G: 0.023987 Loss_D_real: -0.239393 Loss_D_fake 0.023830
+[38/25][3316/3316][24501] Loss_D: -0.263312 Loss_G: 0.024040 Loss_D_real: -0.239490 Loss_D_fake 0.023821
+[39/25][3316/3316][25146] Loss_D: -0.263434 Loss_G: 0.023988 Loss_D_real: -0.239638 Loss_D_fake 0.023796
+[40/25][3316/3316][25791] Loss_D: -0.264655 Loss_G: 0.024099 Loss_D_real: -0.240815 Loss_D_fake 0.023840
+[41/25][3316/3316][26436] Loss_D: -0.263534 Loss_G: 0.023874 Loss_D_real: -0.239659 Loss_D_fake 0.023875
+[42/25][3316/3316][27062] Loss_D: -0.264048 Loss_G: 0.023996 Loss_D_real: -0.240191 Loss_D_fake 0.023857
+[43/25][3316/3316][27707] Loss_D: -0.263921 Loss_G: 0.023992 Loss_D_real: -0.240076 Loss_D_fake 0.023845
+[44/25][3316/3316][28352] Loss_D: -0.264216 Loss_G: 0.023954 Loss_D_real: -0.240358 Loss_D_fake 0.023858
+[45/25][3316/3316][28997] Loss_D: -0.264688 Loss_G: 0.024087 Loss_D_real: -0.240854 Loss_D_fake 0.023834
+[46/25][3316/3316][29623] Loss_D: -0.264752 Loss_G: 0.024082 Loss_D_real: -0.240909 Loss_D_fake 0.023842
+[47/25][3316/3316][30268] Loss_D: -0.263569 Loss_G: 0.024104 Loss_D_real: -0.239705 Loss_D_fake 0.023863
+[48/25][3316/3316][30913] Loss_D: -0.263633 Loss_G: 0.023970 Loss_D_real: -0.239715 Loss_D_fake 0.023919
+[49/25][3316/3316][31539] Loss_D: -0.263983 Loss_G: 0.023965 Loss_D_real: -0.240185 Loss_D_fake 0.023797
+[50/25][3316/3316][32184] Loss_D: -0.263293 Loss_G: 0.024039 Loss_D_real: -0.239475 Loss_D_fake 0.023818
+[51/25][3316/3316][32829] Loss_D: -0.264247 Loss_G: 0.023920 Loss_D_real: -0.240366 Loss_D_fake 0.023881
+[52/25][3316/3316][33474] Loss_D: -0.263409 Loss_G: 0.023993 Loss_D_real: -0.239493 Loss_D_fake 0.023916
+[53/25][3316/3316][34100] Loss_D: -0.263589 Loss_G: 0.024036 Loss_D_real: -0.239797 Loss_D_fake 0.023792
+[54/25][3316/3316][34745] Loss_D: -0.263880 Loss_G: 0.023982 Loss_D_real: -0.240050 Loss_D_fake 0.023830
+[55/25][3316/3316][35390] Loss_D: -0.263292 Loss_G: 0.024018 Loss_D_real: -0.239442 Loss_D_fake 0.023850
+[56/25][3316/3316][36016] Loss_D: -0.263372 Loss_G: 0.023999 Loss_D_real: -0.239542 Loss_D_fake 0.023830
+[57/25][3316/3316][36661] Loss_D: -0.263662 Loss_G: 0.024049 Loss_D_real: -0.239769 Loss_D_fake 0.023893
+[58/25][3316/3316][37306] Loss_D: -0.262880 Loss_G: 0.023953 Loss_D_real: -0.238981 Loss_D_fake 0.023900
+[59/25][3316/3316][37951] Loss_D: -0.263442 Loss_G: 0.023969 Loss_D_real: -0.239571 Loss_D_fake 0.023871
+[60/25][3316/3316][38577] Loss_D: -0.263542 Loss_G: 0.024027 Loss_D_real: -0.239737 Loss_D_fake 0.023805
+[61/25][3316/3316][39222] Loss_D: -0.263566 Loss_G: 0.024008 Loss_D_real: -0.239699 Loss_D_fake 0.023867
+[62/25][3316/3316][39867] Loss_D: -0.264032 Loss_G: 0.024053 Loss_D_real: -0.240211 Loss_D_fake 0.023821
+[63/25][3316/3316][40501] Loss_D: -0.263442 Loss_G: 0.024023 Loss_D_real: -0.239594 Loss_D_fake 0.023848
+[64/25][3316/3316][41146] Loss_D: -0.263480 Loss_G: 0.024003 Loss_D_real: -0.239609 Loss_D_fake 0.023872
+[65/25][3316/3316][41791] Loss_D: -0.263253 Loss_G: 0.024008 Loss_D_real: -0.239360 Loss_D_fake 0.023893
+[66/25][3316/3316][42436] Loss_D: -0.263677 Loss_G: 0.023940 Loss_D_real: -0.239850 Loss_D_fake 0.023827
+[67/25][3316/3316][43062] Loss_D: -0.264015 Loss_G: 0.024014 Loss_D_real: -0.240098 Loss_D_fake 0.023918
+[68/25][3316/3316][43707] Loss_D: -0.263089 Loss_G: 0.024015 Loss_D_real: -0.239147 Loss_D_fake 0.023942
+[69/25][3316/3316][44352] Loss_D: -0.263472 Loss_G: 0.023987 Loss_D_real: -0.239658 Loss_D_fake 0.023814
+[70/25][3316/3316][44997] Loss_D: -0.263441 Loss_G: 0.023999 Loss_D_real: -0.239521 Loss_D_fake 0.023920
+[71/25][3316/3316][45623] Loss_D: -0.264701 Loss_G: 0.024019 Loss_D_real: -0.240846 Loss_D_fake 0.023856
+[72/25][3316/3316][46268] Loss_D: -0.263379 Loss_G: 0.024051 Loss_D_real: -0.239457 Loss_D_fake 0.023922
+[73/25][3316/3316][46913] Loss_D: -0.264337 Loss_G: 0.023979 Loss_D_real: -0.240446 Loss_D_fake 0.023891
+[74/25][3316/3316][47539] Loss_D: -0.264534 Loss_G: 0.024101 Loss_D_real: -0.240602 Loss_D_fake 0.023931
+[75/25][3316/3316][48184] Loss_D: -0.263722 Loss_G: 0.023961 Loss_D_real: -0.239858 Loss_D_fake 0.023863
+[76/25][3316/3316][48829] Loss_D: -0.263578 Loss_G: 0.024005 Loss_D_real: -0.239710 Loss_D_fake 0.023867
+[77/25][3316/3316][49474] Loss_D: -0.264288 Loss_G: 0.024005 Loss_D_real: -0.240388 Loss_D_fake 0.023900
+[78/25][3316/3316][50100] Loss_D: -0.262835 Loss_G: 0.023969 Loss_D_real: -0.239047 Loss_D_fake 0.023788
+[79/25][3316/3316][50745] Loss_D: -0.263514 Loss_G: 0.023995 Loss_D_real: -0.239661 Loss_D_fake 0.023853
+[80/25][3316/3316][51390] Loss_D: -0.263521 Loss_G: 0.023965 Loss_D_real: -0.239674 Loss_D_fake 0.023847
+[81/25][3316/3316][52016] Loss_D: -0.264280 Loss_G: 0.023948 Loss_D_real: -0.240443 Loss_D_fake 0.023837
+[82/25][3316/3316][52661] Loss_D: -0.263944 Loss_G: 0.023981 Loss_D_real: -0.240003 Loss_D_fake 0.023942
+[83/25][3316/3316][53306] Loss_D: -0.263463 Loss_G: 0.023972 Loss_D_real: -0.239635 Loss_D_fake 0.023828
+[84/25][3316/3316][53951] Loss_D: -0.263556 Loss_G: 0.023997 Loss_D_real: -0.239672 Loss_D_fake 0.023884
+[85/25][3316/3316][54577] Loss_D: -0.263443 Loss_G: 0.023972 Loss_D_real: -0.239518 Loss_D_fake 0.023925
+[86/25][3316/3316][55222] Loss_D: -0.263931 Loss_G: 0.024073 Loss_D_real: -0.240054 Loss_D_fake 0.023877
+[87/25][3316/3316][55867] Loss_D: -0.263630 Loss_G: 0.024043 Loss_D_real: -0.239750 Loss_D_fake 0.023880
+[88/25][3316/3316][56501] Loss_D: -0.264593 Loss_G: 0.024088 Loss_D_real: -0.240751 Loss_D_fake 0.023842
+[89/25][3316/3316][57146] Loss_D: -0.264122 Loss_G: 0.024059 Loss_D_real: -0.240256 Loss_D_fake 0.023866
+[90/25][3316/3316][57791] Loss_D: -0.262985 Loss_G: 0.024027 Loss_D_real: -0.239121 Loss_D_fake 0.023864
+[91/25][3316/3316][58436] Loss_D: -0.263482 Loss_G: 0.024016 Loss_D_real: -0.239562 Loss_D_fake 0.023920
+[92/25][3316/3316][59062] Loss_D: -0.264019 Loss_G: 0.024102 Loss_D_real: -0.240113 Loss_D_fake 0.023906
+[93/25][3316/3316][59707] Loss_D: -0.264963 Loss_G: 0.024005 Loss_D_real: -0.241033 Loss_D_fake 0.023931
+[94/25][3316/3316][60352] Loss_D: -0.263814 Loss_G: 0.024020 Loss_D_real: -0.239993 Loss_D_fake 0.023821
+[95/25][3316/3316][60997] Loss_D: -0.264711 Loss_G: 0.024079 Loss_D_real: -0.240837 Loss_D_fake 0.023874
+[96/25][3316/3316][61623] Loss_D: -0.264341 Loss_G: 0.023947 Loss_D_real: -0.240465 Loss_D_fake 0.023876
+[97/25][3316/3316][62268] Loss_D: -0.262314 Loss_G: 0.024000 Loss_D_real: -0.238457 Loss_D_fake 0.023858
+[98/25][3316/3316][62913] Loss_D: -0.263805 Loss_G: 0.024030 Loss_D_real: -0.239910 Loss_D_fake 0.023895
+[99/25][3316/3316][63539] Loss_D: -0.263606 Loss_G: 0.024000 Loss_D_real: -0.239780 Loss_D_fake 0.023826
+[100/25][3316/3316][64184] Loss_D: -0.263459 Loss_G: 0.023977 Loss_D_real: -0.239602 Loss_D_fake 0.023856
+[101/25][3316/3316][64829] Loss_D: -0.263322 Loss_G: 0.023969 Loss_D_real: -0.239450 Loss_D_fake 0.023872
+[102/25][3316/3316][65474] Loss_D: -0.264311 Loss_G: 0.024020 Loss_D_real: -0.240378 Loss_D_fake 0.023933
+[103/25][3316/3316][66100] Loss_D: -0.263381 Loss_G: 0.024058 Loss_D_real: -0.239504 Loss_D_fake 0.023877
+[104/25][3316/3316][66745] Loss_D: -0.263806 Loss_G: 0.023984 Loss_D_real: -0.239916 Loss_D_fake 0.023890
+[105/25][3316/3316][67390] Loss_D: -0.264224 Loss_G: 0.024123 Loss_D_real: -0.240320 Loss_D_fake 0.023904
+[106/25][3316/3316][68016] Loss_D: -0.263681 Loss_G: 0.024015 Loss_D_real: -0.239746 Loss_D_fake 0.023935
+[107/25][3316/3316][68661] Loss_D: -0.263868 Loss_G: 0.024025 Loss_D_real: -0.240007 Loss_D_fake 0.023861
+[108/25][3316/3316][69306] Loss_D: -0.264028 Loss_G: 0.023953 Loss_D_real: -0.240077 Loss_D_fake 0.023951
+[109/25][3316/3316][69951] Loss_D: -0.263786 Loss_G: 0.023975 Loss_D_real: -0.239948 Loss_D_fake 0.023837
+[110/25][3316/3316][70577] Loss_D: -0.264821 Loss_G: 0.024002 Loss_D_real: -0.240956 Loss_D_fake 0.023865
+[111/25][3316/3316][71222] Loss_D: -0.263804 Loss_G: 0.023991 Loss_D_real: -0.239962 Loss_D_fake 0.023842
+[112/25][3316/3316][71867] Loss_D: -0.263837 Loss_G: 0.024034 Loss_D_real: -0.239997 Loss_D_fake 0.023839
+[113/25][3316/3316][72501] Loss_D: -0.263623 Loss_G: 0.024102 Loss_D_real: -0.239754 Loss_D_fake 0.023869
+[114/25][3316/3316][73146] Loss_D: -0.263707 Loss_G: 0.023947 Loss_D_real: -0.239828 Loss_D_fake 0.023879
+[115/25][3316/3316][73791] Loss_D: -0.263677 Loss_G: 0.023978 Loss_D_real: -0.239770 Loss_D_fake 0.023907
+[116/25][3316/3316][74436] Loss_D: -0.264027 Loss_G: 0.024050 Loss_D_real: -0.240187 Loss_D_fake 0.023839
+[117/25][3316/3316][75062] Loss_D: -0.263289 Loss_G: 0.023989 Loss_D_real: -0.239450 Loss_D_fake 0.023839
+[118/25][3316/3316][75707] Loss_D: -0.264118 Loss_G: 0.024096 Loss_D_real: -0.240264 Loss_D_fake 0.023855
+[119/25][3316/3316][76352] Loss_D: -0.263715 Loss_G: 0.024015 Loss_D_real: -0.239746 Loss_D_fake 0.023969
+[120/25][3316/3316][76997] Loss_D: -0.263644 Loss_G: 0.023979 Loss_D_real: -0.239739 Loss_D_fake 0.023905
+[121/25][3316/3316][77623] Loss_D: -0.264832 Loss_G: 0.023968 Loss_D_real: -0.240921 Loss_D_fake 0.023911
+[122/25][3316/3316][78268] Loss_D: -0.263672 Loss_G: 0.023998 Loss_D_real: -0.239773 Loss_D_fake 0.023899
+[123/25][3316/3316][78913] Loss_D: -0.262729 Loss_G: 0.024036 Loss_D_real: -0.238888 Loss_D_fake 0.023840
+[124/25][3316/3316][79539] Loss_D: -0.264163 Loss_G: 0.023995 Loss_D_real: -0.240369 Loss_D_fake 0.023794
+[125/25][3316/3316][80184] Loss_D: -0.263699 Loss_G: 0.024022 Loss_D_real: -0.239950 Loss_D_fake 0.023750
+[126/25][3316/3316][80829] Loss_D: -0.263528 Loss_G: 0.024088 Loss_D_real: -0.239614 Loss_D_fake 0.023913
+[127/25][3316/3316][81474] Loss_D: -0.264254 Loss_G: 0.024045 Loss_D_real: -0.240411 Loss_D_fake 0.023843
+[128/25][3316/3316][82100] Loss_D: -0.263543 Loss_G: 0.024034 Loss_D_real: -0.239663 Loss_D_fake 0.023879
+[129/25][3316/3316][82745] Loss_D: -0.263444 Loss_G: 0.023995 Loss_D_real: -0.239626 Loss_D_fake 0.023818
+[130/25][3316/3316][83390] Loss_D: -0.263871 Loss_G: 0.023978 Loss_D_real: -0.240033 Loss_D_fake 0.023838
+[131/25][3316/3316][84016] Loss_D: -0.263953 Loss_G: 0.024087 Loss_D_real: -0.240086 Loss_D_fake 0.023868
+[132/25][3316/3316][84661] Loss_D: -0.263641 Loss_G: 0.024013 Loss_D_real: -0.239774 Loss_D_fake 0.023867
+[133/25][3316/3316][85306] Loss_D: -0.264458 Loss_G: 0.024052 Loss_D_real: -0.240617 Loss_D_fake 0.023841
+[134/25][3316/3316][85951] Loss_D: -0.263524 Loss_G: 0.024043 Loss_D_real: -0.239616 Loss_D_fake 0.023908
+[135/25][3316/3316][86577] Loss_D: -0.264292 Loss_G: 0.023998 Loss_D_real: -0.240452 Loss_D_fake 0.023840
+[136/25][3316/3316][87222] Loss_D: -0.263415 Loss_G: 0.024043 Loss_D_real: -0.239482 Loss_D_fake 0.023932
+[137/25][3316/3316][87867] Loss_D: -0.264204 Loss_G: 0.023995 Loss_D_real: -0.240402 Loss_D_fake 0.023802
+[138/25][3316/3316][88501] Loss_D: -0.263250 Loss_G: 0.024048 Loss_D_real: -0.239366 Loss_D_fake 0.023883
+[139/25][3316/3316][89146] Loss_D: -0.263773 Loss_G: 0.024003 Loss_D_real: -0.239937 Loss_D_fake 0.023836
+[140/25][3316/3316][89791] Loss_D: -0.263204 Loss_G: 0.024001 Loss_D_real: -0.239316 Loss_D_fake 0.023887
+[141/25][3316/3316][90436] Loss_D: -0.263696 Loss_G: 0.024031 Loss_D_real: -0.239771 Loss_D_fake 0.023925
+[142/25][3316/3316][91062] Loss_D: -0.263960 Loss_G: 0.024010 Loss_D_real: -0.240089 Loss_D_fake 0.023871
+[143/25][3316/3316][91707] Loss_D: -0.263786 Loss_G: 0.023968 Loss_D_real: -0.239873 Loss_D_fake 0.023913
+[144/25][3316/3316][92352] Loss_D: -0.263153 Loss_G: 0.024037 Loss_D_real: -0.239280 Loss_D_fake 0.023873
+[145/25][3316/3316][92997] Loss_D: -0.263498 Loss_G: 0.024043 Loss_D_real: -0.239632 Loss_D_fake 0.023866
+[146/25][3316/3316][93623] Loss_D: -0.263197 Loss_G: 0.023933 Loss_D_real: -0.239300 Loss_D_fake 0.023897
+[147/25][3316/3316][94268] Loss_D: -0.263202 Loss_G: 0.023997 Loss_D_real: -0.239360 Loss_D_fake 0.023842
+[148/25][3316/3316][94913] Loss_D: -0.264151 Loss_G: 0.024052 Loss_D_real: -0.240260 Loss_D_fake 0.023891
+[149/25][3316/3316][95539] Loss_D: -0.264060 Loss_G: 0.024013 Loss_D_real: -0.240137 Loss_D_fake 0.023923
+[150/25][3316/3316][96184] Loss_D: -0.263300 Loss_G: 0.023969 Loss_D_real: -0.239453 Loss_D_fake 0.023846
+[151/25][3316/3316][96829] Loss_D: -0.263653 Loss_G: 0.024073 Loss_D_real: -0.239768 Loss_D_fake 0.023885
+[152/25][3316/3316][97474] Loss_D: -0.264526 Loss_G: 0.024034 Loss_D_real: -0.240647 Loss_D_fake 0.023880
+[153/25][3316/3316][98100] Loss_D: -0.264140 Loss_G: 0.023989 Loss_D_real: -0.240255 Loss_D_fake 0.023885
+[154/25][3316/3316][98745] Loss_D: -0.263361 Loss_G: 0.023868 Loss_D_real: -0.239444 Loss_D_fake 0.023916
+[155/25][3316/3316][99390] Loss_D: -0.264076 Loss_G: 0.024006 Loss_D_real: -0.240173 Loss_D_fake 0.023903
+[156/25][3316/3316][100016] Loss_D: -0.264885 Loss_G: 0.024008 Loss_D_real: -0.241031 Loss_D_fake 0.023854
+[157/25][3316/3316][100661] Loss_D: -0.263801 Loss_G: 0.024060 Loss_D_real: -0.239976 Loss_D_fake 0.023825
+[158/25][3316/3316][101306] Loss_D: -0.263944 Loss_G: 0.023986 Loss_D_real: -0.240106 Loss_D_fake 0.023838
+[159/25][3316/3316][101951] Loss_D: -0.264068 Loss_G: 0.023901 Loss_D_real: -0.240193 Loss_D_fake 0.023875
+[160/25][3316/3316][102577] Loss_D: -0.264322 Loss_G: 0.023951 Loss_D_real: -0.240466 Loss_D_fake 0.023857
+[161/25][3316/3316][103222] Loss_D: -0.263134 Loss_G: 0.023987 Loss_D_real: -0.239285 Loss_D_fake 0.023848
+[162/25][3316/3316][103867] Loss_D: -0.263595 Loss_G: 0.023973 Loss_D_real: -0.239733 Loss_D_fake 0.023862
+[163/25][3316/3316][104501] Loss_D: -0.264900 Loss_G: 0.024113 Loss_D_real: -0.241012 Loss_D_fake 0.023888
+[164/25][3316/3316][105146] Loss_D: -0.263426 Loss_G: 0.024046 Loss_D_real: -0.239530 Loss_D_fake 0.023896
+[165/25][3316/3316][105791] Loss_D: -0.263900 Loss_G: 0.024050 Loss_D_real: -0.240027 Loss_D_fake 0.023873
+[166/25][3316/3316][106436] Loss_D: -0.263890 Loss_G: 0.024034 Loss_D_real: -0.239995 Loss_D_fake 0.023895
+[167/25][3316/3316][107062] Loss_D: -0.263902 Loss_G: 0.023956 Loss_D_real: -0.239986 Loss_D_fake 0.023916
+[168/25][3316/3316][107707] Loss_D: -0.263796 Loss_G: 0.023982 Loss_D_real: -0.239947 Loss_D_fake 0.023849
+[169/25][3316/3316][108352] Loss_D: -0.264179 Loss_G: 0.024047 Loss_D_real: -0.240310 Loss_D_fake 0.023868
+[170/25][3316/3316][108997] Loss_D: -0.263097 Loss_G: 0.023982 Loss_D_real: -0.239326 Loss_D_fake 0.023771
+[171/25][3316/3316][109623] Loss_D: -0.264314 Loss_G: 0.024086 Loss_D_real: -0.240520 Loss_D_fake 0.023795
+[172/25][3316/3316][110268] Loss_D: -0.263512 Loss_G: 0.023967 Loss_D_real: -0.239598 Loss_D_fake 0.023914
+[173/25][3316/3316][110913] Loss_D: -0.262862 Loss_G: 0.024027 Loss_D_real: -0.238958 Loss_D_fake 0.023904
+[174/25][3316/3316][111539] Loss_D: -0.263920 Loss_G: 0.024015 Loss_D_real: -0.240064 Loss_D_fake 0.023856
+[175/25][3316/3316][112184] Loss_D: -0.263270 Loss_G: 0.023990 Loss_D_real: -0.239325 Loss_D_fake 0.023945
+[176/25][3316/3316][112829] Loss_D: -0.264001 Loss_G: 0.023978 Loss_D_real: -0.240106 Loss_D_fake 0.023895
+[177/25][3316/3316][113474] Loss_D: -0.263530 Loss_G: 0.024031 Loss_D_real: -0.239645 Loss_D_fake 0.023885
+[178/25][3316/3316][114100] Loss_D: -0.263859 Loss_G: 0.024038 Loss_D_real: -0.239914 Loss_D_fake 0.023944
+[179/25][3316/3316][114745] Loss_D: -0.263505 Loss_G: 0.024043 Loss_D_real: -0.239655 Loss_D_fake 0.023850
+[180/25][3316/3316][115390] Loss_D: -0.264532 Loss_G: 0.024077 Loss_D_real: -0.240661 Loss_D_fake 0.023871
+[181/25][3316/3316][116016] Loss_D: -0.264018 Loss_G: 0.024000 Loss_D_real: -0.240137 Loss_D_fake 0.023881
+[182/25][3316/3316][116661] Loss_D: -0.263746 Loss_G: 0.023965 Loss_D_real: -0.239951 Loss_D_fake 0.023795
+[183/25][3316/3316][117306] Loss_D: -0.264183 Loss_G: 0.024025 Loss_D_real: -0.240272 Loss_D_fake 0.023911
+[184/25][3316/3316][117951] Loss_D: -0.263481 Loss_G: 0.023994 Loss_D_real: -0.239602 Loss_D_fake 0.023879
+[185/25][3316/3316][118577] Loss_D: -0.263075 Loss_G: 0.023969 Loss_D_real: -0.239179 Loss_D_fake 0.023896
+[186/25][3316/3316][119222] Loss_D: -0.263638 Loss_G: 0.023966 Loss_D_real: -0.239737 Loss_D_fake 0.023901
+[187/25][3316/3316][119867] Loss_D: -0.264133 Loss_G: 0.023977 Loss_D_real: -0.240306 Loss_D_fake 0.023827
+[188/25][3316/3316][120501] Loss_D: -0.263645 Loss_G: 0.024053 Loss_D_real: -0.239772 Loss_D_fake 0.023873
+[189/25][3316/3316][121146] Loss_D: -0.264521 Loss_G: 0.023963 Loss_D_real: -0.240653 Loss_D_fake 0.023869
+[190/25][3316/3316][121791] Loss_D: -0.263507 Loss_G: 0.023992 Loss_D_real: -0.239588 Loss_D_fake 0.023919
+[191/25][3316/3316][122436] Loss_D: -0.263441 Loss_G: 0.024045 Loss_D_real: -0.239582 Loss_D_fake 0.023860
+[192/25][3316/3316][123062] Loss_D: -0.264537 Loss_G: 0.024072 Loss_D_real: -0.240673 Loss_D_fake 0.023864
+[193/25][3316/3316][123707] Loss_D: -0.264055 Loss_G: 0.024042 Loss_D_real: -0.240153 Loss_D_fake 0.023903
+[194/25][3316/3316][124352] Loss_D: -0.263635 Loss_G: 0.023968 Loss_D_real: -0.239686 Loss_D_fake 0.023949
+[195/25][3316/3316][124997] Loss_D: -0.264618 Loss_G: 0.024029 Loss_D_real: -0.240827 Loss_D_fake 0.023791
+[196/25][3316/3316][125623] Loss_D: -0.263375 Loss_G: 0.023993 Loss_D_real: -0.239547 Loss_D_fake 0.023828
+[197/25][3316/3316][126268] Loss_D: -0.264207 Loss_G: 0.024015 Loss_D_real: -0.240359 Loss_D_fake 0.023848
+[198/25][3316/3316][126913] Loss_D: -0.263520 Loss_G: 0.023961 Loss_D_real: -0.239684 Loss_D_fake 0.023835
+[199/25][3316/3316][127539] Loss_D: -0.264465 Loss_G: 0.023972 Loss_D_real: -0.240548 Loss_D_fake 0.023916
